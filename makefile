@@ -1,8 +1,21 @@
+STEM := Rmeetup_Workflow
+FULLSCREEN := $(STEM)_fullscreen
+HANDOUT := $(STEM)_handout
 
-all: output/Rmeetup_Workflow_fullscreen.pdf
-
-	
-output/Rmeetup_Workflow_fullscreen.pdf: Rmeetup_Workflow.tex
+fullscreen: 
 	mkdir -p output
-	cp *.tex output
-	cd output; texify --run-viewer --pdf Rmeetup_Workflow_fullscreen.tex 
+	cp *.tex images/* output
+	cd output; texify --run-viewer --pdf $(FULLSCREEN).tex
+	
+handout: 	
+	mkdir -p output
+	cp *.tex images/* output
+	cd output; texify --run-viewer --pdf $(HANDOUT).tex
+	
+clean:
+	-rm output/*
+
+backup:
+	-mkdir backup
+	-cp output/$(FULLSCREEN).pdf backup
+	-cp output/$(HANDOUT).pdf backup  
